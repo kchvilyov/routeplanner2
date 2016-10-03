@@ -1,0 +1,32 @@
+<!-- google analytics begin -->
+<script>
+<%=definition.getGoogleAnalytics()%>
+</script>
+<!-- google analytics end -->
+
+		<!-- Facefook Include the JavaScript SDK on your page once, ideally right after the opening <body> tag. -->
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1&status=0&appId=1539395959605128";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+<div id="header">
+	<a id="left_image" href="/routeplanner" name="routeplanner" title="Routeplanner route planner" alt="<%=definition.getAlt(10)%>">
+		<img src="/images/routeplanner.gif" title="<%=definition.getPageTitle(0)%>" alt="<%=definition.getAlt(10)%>">
+	</a>
+	<img id="middle_image" src="/images/yours_text.png" alt="OpenStreetMap Routing Service" />
+	<a id="right_image" href="/routeplanner" name="routeplanner" title="Routeplanner route planner" alt="<%=definition.getAlt(11)%>">
+		<img src="/images/routeplanner.gif" title="<%=definition.getPageTitle(0)%>" alt="<%=definition.getAlt(12)%>">
+	</a>
+	<div id="site_menu">
+		<h1>
+			<a href="/routeplanner" title="<%=definition.getPageTitle(0)%>" alt="<%=definition.getAlt(13)%>">Routeplanner</a>
+			<a href="/help-routeplanner"  title="<%=definition.getPageTitle(1)%>" alt="<%=definition.getAlt(14)%>">Help</a>
+			<a href="/about-routeplanner"  title="<%=definition.getPageTitle(2)%>" alt="<%=definition.getAlt(15)%>">About</a>
+		</h1>
+	</div>
+<div style="clear:both;"></div>
+</div>

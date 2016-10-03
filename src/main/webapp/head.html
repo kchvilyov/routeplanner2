@@ -1,0 +1,37 @@
+<%@page import="us.crimean.maps.definition.Definition"%>
+<%
+	final Definition definition = new Definition(request);
+	final String page_url = definition.getPageUrl();
+	final String page_canonical_url = definition.getCanonicalUrl();
+	final String page_title = definition.getPageTitle();
+	final String page_description = definition.getPageDescription();
+	final String routeplannerTitle0 = definition.getShortTitle(new int[]{0,0,0});	//definition.getPageTitle(new int[]{0,0});
+	final String routeplannerTitle1 = definition.getShortTitle(new int[]{0,0,0,3});
+%>
+<title><%=page_title%></title>
+<meta name="title" content="<%=page_title%>" />
+<META name="description" content="<%=page_description%>">
+<link rel="canonical" href="<%=page_canonical_url%>"/>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta http-equiv="Content-language" content ="en">
+<META name="keywords" content="<%=definition.getPageKeywords()%>">
+<link rel="stylesheet" href="reset.css"/>
+<link rel="stylesheet" href="yournavigation.css"/>
+<link rel="icon" href="/thumbnails/routeplanner.ico" type="image/x-icon">
+<link rel="shortcut icon" href="/thumbnails/routeplanner.ico" type="image/x-icon"/>
+<link rel="stylesheet" href="/styles/style.css"/>
+<link rel="stylesheet" media="print" href="/styles/print.css"/>
+<meta name="Author" content="Konstantin Chvilyov" />
+<meta name="Document-state" content ="Dynamic" />
+
+<!--# Copy the script tags and place them inside and at the end of your "head" tag.-->
+<script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "f247f5d7-e70b-41ed-be49-cee7e6caf8a1", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
+<meta property="og:site_name" content="<%=routeplannerTitle0%>" />
+<meta property="og:type" content="<%=definition.getShortTitle(new int[]{-1,0,0}).toLowerCase()%>" />
+<meta property="og:image" content="<%=definition.getServerUrl()%>/images/routeplanner.gif" />
+<!-- main page definision -->
+<meta property="og:url" content="<%=page_url%>" />
+<meta property="og:title" content="<%=page_title%>" />
+<meta property="og:description" content="<%=page_description%>" />
