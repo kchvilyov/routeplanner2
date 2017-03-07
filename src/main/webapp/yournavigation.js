@@ -262,10 +262,14 @@ function init() {
 			
 	var layerMapnik = new OpenLayers.Layer.OSM.Mapnik("Mapnik");
 
-	var layerCycle = new OpenLayers.Layer.OSM.CycleMap("Cycle Map", {
-		displayOutsideMaxExtent: true,
-		wrapDateLine: true
-	});
+//	var layerCycle = new OpenLayers.Layer.OSM.CycleMap("Cycle Map", {
+//		displayOutsideMaxExtent: true,
+//		wrapDateLine: true
+//	});
+	
+	var layerCycle = new OpenLayers.Layer.OSM("Cycle Map",
+            ['https://tile.thunderforest.com/cycle/${z}/${x}/${y}.png?apikey=075c0efe783d46719fd7a5222b4367d2']
+    );
 
 	myFirstMap.addLayers([layerMapnik, layerCycle]);
 	//Warning! Must be registered after layers adding for ALL layers with different functions only! Otherwise woun't work correctly!
