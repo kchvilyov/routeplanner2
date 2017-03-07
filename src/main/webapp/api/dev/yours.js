@@ -610,11 +610,10 @@ Yours.Route = function(map, customRouteCallback, customWaypointCallback) {
 		 * motorboat
 		 * boat
 		 */
-		//it is temporary stub
-		//while foot does not work
-		//TODO fix
-		//type: 'foot',
+		//temporary stub
+		//if foot does not work
 		type: 'bicycle',
+		//type: 'foot',
 		layer: 'mapnik'
 	};
 
@@ -1416,14 +1415,7 @@ Yours.Segment = function(ParentRoute) {
 			'&flon=' + flonlat.lon +
 			'&tlat=' + tlonlat.lat +
 			'&tlon=' + tlonlat.lon;
-/*		if (this.route.parameters.type == 'foot') {
-			//it is temporary stub
-			//while foot does not work
-			//TODO fix
-			this.search += '&v=' + 'bicycle';
-		} else {*/
-			this.search += '&v=' + this.route.parameters.type;
-//		}
+		this.search += '&v=' + this.route.parameters.type;
 		this.search += '&fast=' + this.route.parameters.fast +
 			'&layer=' + this.route.parameters.layer +
 			'&instructions=' + this.route.instructions;

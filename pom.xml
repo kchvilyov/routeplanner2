@@ -32,10 +32,10 @@
 		<!-- GraphHopper -->
         <dependency>
             <groupId>com.graphhopper</groupId>
-            <!-- artifactId>graphhopper-core</artifactId>
-            <version>0.8-SNAPSHOT</version -->
-            <artifactId>graphhopper</artifactId>
-            <version>0.7.0</version>
+            <artifactId>graphhopper-core</artifactId>
+            <version>0.8.2</version>
+            <!-- artifactId>graphhopper</artifactId>
+            <version>0.7.0</version -->
             <exclusions>
                 <!-- We cannot yet exclude this as e.g. Helper class uses trove classes
                      and Helper is used e.g. in PointList
@@ -44,16 +44,29 @@
                     <artifactId>trove4j</artifactId>
                 </exclusion>
                 -->
+                <!-- 
                 <exclusion>
                     <groupId>org.apache.xmlgraphics</groupId>
                     <artifactId>xmlgraphics-commons</artifactId>
                 </exclusion>
+                <exclusion>
+		        	<groupId>com.squareup.okhttp3</groupId>
+		        	<artifactId>okhttp</artifactId>
+                </exclusion>
+                 -->
             </exclusions>
         </dependency>
+        <!-- 
+        <dependency>
+        	<groupId>com.squareup.okhttp3</groupId>
+        	<artifactId>okhttp</artifactId>
+        	<version>3.4.1</version>
+       	</dependency>
+       	 -->
         <dependency>
         	<groupId>com.graphhopper</groupId>
         	<artifactId>directions-api-java-client</artifactId>
-        	<version>0.7.0.1</version>
+        	<version>0.8.2.1</version>
        	</dependency>   
   </dependencies>
   <profiles>

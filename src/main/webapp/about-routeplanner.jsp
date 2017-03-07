@@ -45,7 +45,7 @@
 				<h3>YOURS project</h3>
 				<a href="/routeplanner" title="<%=definition.getShortTitle(new int[]{4,0,0,3})%>" alt="<%=definition.getAlt(3)%>"><%=definition.getShortTitle(new int[]{4,0,0})%></a> based on the <a href="http://wiki.openstreetmap.org/wiki/YOURS" target="_BLANK">YOURS project</a> software. 
 				I compared the YOURS project navigation results with another routing services. 
-				I saw YOURS project routeplanner give the best Foot/Pedestrian/Bicycle results in Crimea, Ukraine region.  
+				I saw YOURS project routeplanner give the best Foot/Pedestrian/Bicycle results for Crimean peninsula and around.  
 				So I express my gratitude to <a href="http://wiki.openstreetmap.org/wiki/User:Lambertus" title="User:Lambertus" alt="L.IJsselstein" target="_BLANK">Lambertus</a> and other contributors gave me to use this project possibility.
 
 				<h3><a href="/routeplanner" title="<%=definition.getShortTitle(new int[]{5,0,0,8})%>" alt="<%=definition.getAlt(4)%>"><%=definition.getShortTitle(new int[]{5,0,0})%></a></h3>

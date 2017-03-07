@@ -197,7 +197,7 @@ public class YournavigationRequest {
         // If instruction should be calculated and returned.
         //req.getHints().put("instructions", true);
 		if (instructions != null) {
-            req.getHints().put("instructions", instructions.equals('1'));
+            req.getHints().put("instructions", instructions.equals("1"));
         }
         return req;
 	}

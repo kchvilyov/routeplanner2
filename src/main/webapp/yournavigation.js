@@ -306,6 +306,27 @@ function init() {
 		var zlonlat = new OpenLayers.LonLat();
 		var zlevel = -1;
 		var params = location.search.substr(1).split('&');
+		
+		//first part
+		for (var i = 0; i < params.length; i++) {
+			var fields = params[i].split('=');
+			
+			switch (fields[0]) {
+				case 'v':
+					$("input[name='type'][value='" + fields[1] + "']").attr("checked", true);
+					break;
+				case 'fast':
+					if (parseInt(fields[1]) == 1) {
+						$("input[name='method'][value='fast']").attr("checked", true);
+					} else {
+						$("input[name='method'][value='short']").attr("checked", true);
+					}
+					break;
+			}
+		}
+		prepareDrawRoute();
+		
+		//second part
 		for (var i = 0; i < params.length; i++) {
 			var fields = params[i].split('=');
 			
@@ -343,16 +364,16 @@ function init() {
 						myFirstRoute.updateWaypoint("selected", tlonlat.clone().transform(myFirstMap.displayProjection, myFirstMap.projection));
 					}
 					break;
-				case 'v':
-					$("input[name='type'][value='" + fields[1] + "']").attr("checked", true);
-					break;
-				case 'fast':
-					if (parseInt(fields[1]) == 1) {
-						$("input[name='method'][value='fast']").attr("checked", true);
-					} else {
-						$("input[name='method'][value='short']").attr("checked", true);
-					}
-					break;
+//				case 'v':
+//					$("input[name='type'][value='" + fields[1] + "']").attr("checked", true);
+//					break;
+//				case 'fast':
+//					if (parseInt(fields[1]) == 1) {
+//						$("input[name='method'][value='fast']").attr("checked", true);
+//					} else {
+//						$("input[name='method'][value='short']").attr("checked", true);
+//					}
+//					break;
 				case 'layer':
 					switch (fields[1]) {
 						case 'cycle':
@@ -390,9 +411,10 @@ function init() {
 				myFirstMap.zoomToExtent(extent);
 			}
 		}
-		
-		prepareDrawRoute();
-		myFirstRoute.draw();
+		if (!myFirstRoute.autoroute) {
+			prepareDrawRoute();
+			myFirstRoute.draw();
+		}
 		if (zlevel != -1) {
 			var extent = myFirstRoute.Markers.getDataExtent();
 			if (extent != null) {

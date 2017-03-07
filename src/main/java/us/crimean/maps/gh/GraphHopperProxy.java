@@ -13,6 +13,9 @@ import com.graphhopper.GHRequest;
 import com.graphhopper.GHResponse;
 import com.graphhopper.PathWrapper;
 import com.graphhopper.api.GraphHopperWeb;
+import com.graphhopper.util.Instruction;
+import com.graphhopper.util.RoundaboutInstruction;
+import com.graphhopper.util.Translation;
 import com.graphhopper.util.shapes.GHPoint;
 import com.graphhopper.util.shapes.GHPoint3D;
 
@@ -58,49 +61,60 @@ public class GraphHopperProxy {
         	return msg;
 		}
 		StringBuffer result = new StringBuffer("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-		result.append("<kml xmlns=\"http://earth.google.com/kml/2.0\">");
-		result.append("<Document>");
-		result.append("<name>KML Samples</name>");
-		result.append("<open>1</open>");
-		result.append("<distance>");
-		result.append(path.getDistance());
+		result.append("\n<kml xmlns=\"http://earth.google.com/kml/2.0\">");
+		result.append("\n<Document>");
+		result.append("\n<name>KML Samples</name>");
+		result.append("\n<open>1</open>");
+		result.append("\n<distance>");
+		//source: distance of the full path, in meter
+		result.append(path.getDistance()/1000);
 		result.append("</distance>");
-		result.append("<traveltime>");
-		result.append(path.getTime());
+		result.append("\n<traveltime>");
+		//source: time of the full path, in milliseconds
+		result.append(path.getTime()/1000);
 		result.append("</traveltime>");
-		result.append("<description>");
-		result.append(path.getDescription());
+		result.append("\n<description>");
+		//source: get information per turn instruction
+		//result.append(path.getInstructions());
+		int counter = 0;
+		for (Instruction instruction: path.getInstructions()) {
+			if (counter > 0) {
+				result.append("&lt;br&gt;\n");
+			}
+			result.append(instruction.getName() + " " + (int) instruction.getDistance() + "m." + instruction.getTime()/1000 + "s.");
+			counter++;
+		}
 		result.append("</description>");
-		result.append("<Folder>");
-		result.append("<name>Paths</name>");
-		result.append("<visibility>0</visibility>");
-		result.append("<description>Examples of paths.</description>");
-		result.append("<Placemark>");
-		result.append("<name>Tessellated</name>");
-		result.append("<visibility>0</visibility>");
-		result.append("<description>");
+		result.append("\n<Folder>");
+		result.append("\n<name>Paths</name>");
+		result.append("\n<visibility>0</visibility>");
+		result.append("\n<description>Examples of paths.</description>");
+		result.append("\n<Placemark>");
+		result.append("\n<name>Tessellated</name>");
+		result.append("\n<visibility>0</visibility>");
+		result.append("\n<description>");
 		result.append("<![CDATA[If the <tessellate> tag has a value of 1, the line will contour to the underlying terrain]]>");
 		result.append("</description>");
-		result.append("<LineString>");
-		result.append("<tessellate>1</tessellate>");
-		result.append("<coordinates>");
+		result.append("\n<LineString>");
+		result.append("\n<tessellate>1</tessellate>");
+		result.append("\n<coordinates>");
 		for (Iterator<GHPoint3D> iterator = path.getPoints().iterator(); iterator.hasNext();) {
 			GHPoint3D point = iterator.next();
 			if (point == null) {
 				log.warning("Empty point");
 			} else {
-				result.append(point.lat);
-				result.append(',');
 				result.append(point.lon);
-				result.append(' ');
+				result.append(',');
+				result.append(point.lat);
+				result.append('\n');
 			}
 		}
 		result.append("</coordinates>");
-		result.append("</LineString>");
-		result.append("</Placemark>");
-		result.append("</Folder>");
-		result.append("</Document>");
-		result.append("</kml>");
+		result.append("\n</LineString>");
+		result.append("\n</Placemark>");
+		result.append("\n</Folder>");
+		result.append("\n</Document>");
+		result.append("\n</kml>");
 		return result.toString();
 	}
 

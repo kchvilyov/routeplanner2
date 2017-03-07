@@ -62,15 +62,16 @@ public class ProxyServlet extends HttpServlet {
 	            }
 	            Map<String,String> parameterMap = new TreeMap<String,String>();
 	            String responseString = httpClient.getRequest(url, parameterMap);
-	        	// url example: http://www.yournavigation.org/api/dev/route.php?flat=44.94491693799927&flon=34.09347383806334&tlat=44.945645930052336&tlon=34.079706592882&v=bicycle&fast=0&layer=mapnik&instructions=1
 	            if ((null == responseString || responseString.length() < 80) && url.indexOf("route.php") > 0) {
+		        	// url example: http://www.yournavigation.org/api/dev/route.php?flat=44.94491693799927&flon=34.09347383806334&tlat=44.945645930052336&tlon=34.079706592882&v=bicycle&fast=0&layer=mapnik&instructions=1
 	            	//Server not ready to process requests. Please try again later.
-	            	log.warning((responseString == null ? "Empty" : responseString) + " response of request:" + url);
+	            	log.info("\"" + responseString + "\" response of request:" + url);
 	            	responseString = GraphHopperProxy.requestFromYournavigationUrl(url);
+		            if (null == responseString || responseString.length() < 80) {
+		            	log.warning("\"" + responseString + "\" GraphHopper response of request:" + url);	            }
 	            }
 	            PrintWriter out = response.getWriter();
 	            out.println(responseString);
 	            out.close();
-	            //log.info("responseString:"+responseString);
 	        }
 }
