@@ -3,8 +3,6 @@ package comlanka.appengine.property;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 
-import java.util.List;
-
 /**
  * Created by IntelliJ IDEA.
  * User: ishara
@@ -16,13 +14,6 @@ public class ASP {
     static {
         ObjectifyService.register(Property.class);
     }
-/*
-    public static List<Property> getProperty()
-    {
-        Objectify ofy = ofy();
-        return ofy.query(Property.class).list();
-    }
-*/
     public static Property getProperty(String code)
     {
        Objectify ofy = ofy();

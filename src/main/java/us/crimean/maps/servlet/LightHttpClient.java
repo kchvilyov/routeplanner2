@@ -9,8 +9,6 @@ import java.net.URL;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javax.servlet.http.HttpServlet;
-
 public class LightHttpClient {
     private static final Logger log = Logger.getLogger(LightHttpClient.class.getName());
 

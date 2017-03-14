@@ -1,6 +1,8 @@
 package us.crimean.maps.definition;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.logging.Logger;
@@ -409,7 +411,15 @@ public class Definition {
 
 	private String decodeWaypointName(String paramValue)
 			throws UnsupportedEncodingException {
-		String res = URLDecoder.decode(paramValue, "UTF-8");
+		String res;
+		try {
+			URI uri = new URI(paramValue);
+			res = uri.getPath();
+		} catch (URISyntaxException e) {
+			log.warning("Can't decode value:" + paramValue + " \n" + e);
+			res = URLDecoder.decode(paramValue, "UTF-8");
+		}
+
 		if (res != null) {
 			res = res.replace("_", " ");
 		}

@@ -4,7 +4,6 @@ import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -14,12 +13,8 @@ import com.graphhopper.GHResponse;
 import com.graphhopper.PathWrapper;
 import com.graphhopper.api.GraphHopperWeb;
 import com.graphhopper.util.Instruction;
-import com.graphhopper.util.RoundaboutInstruction;
-import com.graphhopper.util.Translation;
-import com.graphhopper.util.shapes.GHPoint;
 import com.graphhopper.util.shapes.GHPoint3D;
 
-import us.crimean.maps.servlet.ProxyServlet;
 import us.crimean.maps.yn.YournavigationRequest;
 
 public class GraphHopperProxy {

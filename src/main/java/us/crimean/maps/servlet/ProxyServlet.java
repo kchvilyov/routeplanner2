@@ -17,7 +17,6 @@ import us.crimean.maps.gh.GraphHopperProxy;
 public class ProxyServlet extends HttpServlet {
     private static final Logger log = Logger.getLogger(ProxyServlet.class.getName());
 	private static final String URL_PARAM_NAME = "url";
-	private static final String FIRST_PARAM_DIVIDER = "?";
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 	        throws IOException, ServletException
@@ -30,20 +29,6 @@ public class ProxyServlet extends HttpServlet {
 	            //response.setHeader("Access-Control-Allow-Origin", "*"); //* allow for all
 	            
 	            //Can be with while symbol /%20: http://domain.tld/data.do?url=http://nominatim.openstreetmap.org/search/?q=%D0%9D%D0%B5%D0%B0%D0%BF%D0%BE%D0%BB%D1%8C%20%D0%A1%D0%BA%D0%B8%D1%84%D1%81%D0%BA%D0%B8%D0%B9&format=xml
-	            /*
-	            LightHttpClient httpClient = new LightHttpClient();
-	            String url = request.getParameter(URL_PARAM_NAME);
-	            if (null == url || url.length() < 3) {
-	            	throw new ServletException("Incorrect " + URL_PARAM_NAME + " param value: " + url + " in request: " + request.getRequestURI());
-	            }
-	            Map<String,String> parameterMap = new TreeMap<String,String>();
-	            //Map parameterMap = request.getParameterMap();
-	            for (Object key : request.getParameterMap().keySet()) {
-	            	if (!URL_PARAM_NAME.equals(key)) {
-	            		parameterMap.put((String) key, request.getParameter((String) key));
-	            	}
-	            }
-	             */
 	            //So better to find request URL by first "url=" String
 	            LightHttpClient httpClient = new LightHttpClient();
 	            String url = request.getQueryString();
