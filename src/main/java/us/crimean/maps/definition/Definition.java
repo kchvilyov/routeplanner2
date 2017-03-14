@@ -247,11 +247,12 @@ public class Definition {
 	public Definition(HttpServletRequest request) {
 		super();
 		this.request = request;
-		if (!"UTF-8".equals(request.getCharacterEncoding())) {
+		//if (!"UTF-8".equals(request.getCharacterEncoding())) {
+		if (null != request.getCharacterEncoding()) {
 			try {
-				request.setCharacterEncoding("UTF-8");
+				request.setCharacterEncoding(null);
 			} catch (UnsupportedEncodingException e) {
-				log.warning("Can't set encoding \"UTF-8\" instead of \"" + request.getCharacterEncoding() + "\" for request:" + request.getRequestURI() + " \n" + e);
+				log.warning("Can't set encoding \"null\" instead of \"" + request.getCharacterEncoding() + "\" for request:" + request.getRequestURI() + " \n" + e);
 			}
 		}
 	}
