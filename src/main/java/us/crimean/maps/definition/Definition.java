@@ -5,6 +5,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -243,16 +244,17 @@ public class Definition {
 
 	HttpServletRequest request;
 	private boolean localDebug = true; //For debug at the local server
+	private Boolean decodeParam;
 
 	public Definition(HttpServletRequest request) {
 		super();
 		this.request = request;
-		//if (!"UTF-8".equals(request.getCharacterEncoding())) {
-		if (null != request.getCharacterEncoding()) {
+		if (!"UTF-8".equalsIgnoreCase(request.getCharacterEncoding())) {
+			//TODO remove it if will continue no remote result
 			try {
-				request.setCharacterEncoding(null);
+				request.setCharacterEncoding("UTF-8");
 			} catch (UnsupportedEncodingException e) {
-				log.warning("Can't set encoding \"null\" instead of \"" + request.getCharacterEncoding() + "\" for request:" + request.getRequestURI() + " \n" + e);
+				log.warning("Can't set encoding \"UTF-8\" instead of \"" + request.getCharacterEncoding() + "\" for request:" + request.getRequestURI() + " \n" + e);
 			}
 		}
 	}
@@ -419,19 +421,37 @@ public class Definition {
 
 	private String decodeWaypointName(String paramValue)
 			throws UnsupportedEncodingException {
-		String res;
+		String res = null;
+		if (isDecodeParam()) {
+			//remote OpenShift server
+			res = new String(paramValue.getBytes("ISO-8859-1"), "UTF-8");
+		} else {
+			//local Windows server
+			res = paramValue;
+		}
+		/*paramValue is already in "ISO-8859-1") or "UTF-8" coding
+		 * so decode was no change data
 		try {
+			request.getCharacterEncoding();
 			URI uri = new URI(paramValue);
 			res = uri.getPath();
 		} catch (URISyntaxException e) {
 			log.warning("Can't decode value:" + paramValue + " \n" + e);
 			res = URLDecoder.decode(paramValue, "UTF-8");
 		}
-
+		 */
 		if (res != null) {
 			res = res.replace("_", " ");
 		}
 		return res;
+	}
+
+	private boolean isDecodeParam() {
+		if (decodeParam == null) {
+			//decodeParam = !Charset.forName("windows-1251").equals(Charset.defaultCharset());
+			decodeParam = !Charset.forName("UTF-8").equals(Charset.defaultCharset());
+		}
+		return decodeParam;
 	}
 
 	private String addParameter(String res, String paramName) {
