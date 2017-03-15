@@ -1,11 +1,7 @@
 package us.crimean.maps.definition;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.nio.charset.Charset;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -244,7 +240,6 @@ public class Definition {
 
 	HttpServletRequest request;
 	private boolean localDebug = true; //For debug at the local server
-	private Boolean decodeParam;
 
 	public Definition(HttpServletRequest request) {
 		super();
@@ -422,11 +417,9 @@ public class Definition {
 	private String decodeWaypointName(String paramValue)
 			throws UnsupportedEncodingException {
 		String res = null;
-		if (isDecodeParam()) {
-			//remote OpenShift server
+		if (DecodeParam.isDecodeParam()) {
 			res = new String(paramValue.getBytes("ISO-8859-1"), "UTF-8");
 		} else {
-			//local Windows server
 			res = paramValue;
 		}
 		/*paramValue is already in "ISO-8859-1") or "UTF-8" coding
@@ -444,14 +437,6 @@ public class Definition {
 			res = res.replace("_", " ");
 		}
 		return res;
-	}
-
-	private boolean isDecodeParam() {
-		if (decodeParam == null) {
-			//decodeParam = !Charset.forName("windows-1251").equals(Charset.defaultCharset());
-			decodeParam = !Charset.forName("UTF-8").equals(Charset.defaultCharset());
-		}
-		return decodeParam;
 	}
 
 	private String addParameter(String res, String paramName) {
