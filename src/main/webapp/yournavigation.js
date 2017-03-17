@@ -244,12 +244,6 @@ function init() {
 			new OpenLayers.Control.LayerSwitcher(),
 			new OpenLayers.Control.Attribution()
 		],
-		/*eventListeners: {
-			//"moveend": mapEvent,
-			//"zoomend": mapEvent,
-			//"changelayer": mapLayerChanged,
-			"changebaselayer": onChangeBaseLayer
-		},*/
 		maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34),
 		maxResolution: 156543.0399,
 		numZoomLevels: 20,
@@ -271,7 +265,17 @@ function init() {
             ['https://tile.thunderforest.com/cycle/${z}/${x}/${y}.png?apikey=075c0efe783d46719fd7a5222b4367d2']
     );
 
-	myFirstMap.addLayers([layerMapnik, layerCycle]);
+	// BING API key for http://openlayers.org. Please get your own at
+	// Created at https://www.bingmapsportal.com/Application#
+	var bingApiKey = "AsmL0Yd6k4kknnGp97kWYcNoMP7kkHSMEDgvbiVx6JEgoCv35vy5wJR6GdLUbUjF";
+
+	var layerBing = new OpenLayers.Layer.Bing({
+	    key: bingApiKey,
+	    type: "AerialWithLabels",
+	    name: "Bing Aerial With Labels"
+	});
+
+	myFirstMap.addLayers([layerMapnik, layerCycle, layerBing]);
 	//Warning! Must be registered after layers adding for ALL layers with different functions only! Otherwise woun't work correctly!
 	layerMapnik.events.register("visibilitychanged", layerMapnik, function() {
         if (this.getVisibility()) {
@@ -285,6 +289,17 @@ function init() {
         }
     });
 	layerCycle.events.register("visibilitychanged", layerCycle, function() {
+        if (this.getVisibility()) {
+        	updateLayer();
+        	if ($('#Permalink').attr("href") === undefined) {
+        		console.warn("Can't update undefined control with Permalink.");
+        	} else {
+        		$('#Permalink').attr("href", myFirstRoute.permalink());
+        		$('#Permalink2').attr("href", myFirstRoute.permalinkWithNames());
+        	}
+        }
+    });
+	layerBing.events.register("visibilitychanged", layerBing, function() {
         if (this.getVisibility()) {
         	updateLayer();
         	if ($('#Permalink').attr("href") === undefined) {
@@ -382,6 +397,9 @@ function init() {
 					switch (fields[1]) {
 						case 'cycle':
 							myFirstMap.setBaseLayer(layerCycle);
+							break;
+						case 'bing':
+							myFirstMap.setBaseLayer(layerBing);
 							break;
 							/*
 						case 'cn':
@@ -746,6 +764,9 @@ function updateLayer() {
 					return;
 				case 'Mapnik':
 					myFirstRoute.parameters.layer = 'mapnik';
+					return;
+				case 'Bing Aerial With Labels':
+					myFirstRoute.parameters.layer = 'bing';
 					return;
 			}
 		}
