@@ -1,6 +1,6 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 		<%@ include file="head.html" %>
@@ -15,6 +15,9 @@
 		<script type="text/javascript" src="http://dev.openlayers.org/releases/OpenLayers-2.13.1/OpenLayers.debug.js"></script>
         <script type="text/javascript" src="http://openstreetmap.org/openlayers/OpenStreetMap.js"></script>
         <script type="text/javascript" src="http://dev.openlayers.org/releases/OpenLayers-2.13.1/lib/deprecated.js"></script>
+
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyALZZlYUwYUBv9PMLRYPAz5OCydWKVA2uE"></script>
+
         <script type="text/javascript" src="include/routeplanner.js"></script>
         <script type="text/javascript" src="api/dev/yours.js"></script>
         <script type="text/javascript" src="yournavigation.js"></script>

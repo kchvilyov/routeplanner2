@@ -268,14 +268,27 @@ function init() {
 	// BING API key for http://openlayers.org. Please get your own at
 	// Created at https://www.bingmapsportal.com/Application#
 	var bingApiKey = "AsmL0Yd6k4kknnGp97kWYcNoMP7kkHSMEDgvbiVx6JEgoCv35vy5wJR6GdLUbUjF";
-
-	var layerBing = new OpenLayers.Layer.Bing({
+	var layerBingal = new OpenLayers.Layer.Bing({
 	    key: bingApiKey,
 	    type: "AerialWithLabels",
-	    name: "Bing Aerial With Labels"
+	    name: "Bing Aerial+Labels"
 	});
 
-	myFirstMap.addLayers([layerMapnik, layerCycle, layerBing]);
+	//GOOGLE API key
+	// Created at https://console.developers.google.com/apis/credentials?project=inspired-ether-161817&hl=ru
+	var googleApiKey = "AIzaSyALZZlYUwYUBv9PMLRYPAz5OCydWKVA2uE";
+
+	var layerGooglet = new OpenLayers.Layer.Google(
+		"Google Terrain",
+		{type: google.maps.MapTypeId.TERRAIN}
+	);
+
+	var layerGooglesl = new OpenLayers.Layer.Google(
+		"Google Satellite+Labels",
+		{type: google.maps.MapTypeId.HYBRID, numZoomLevels: 20}
+	);
+
+	myFirstMap.addLayers([layerMapnik, layerCycle, layerGooglet, layerGooglesl, layerBingal]);
 	//Warning! Must be registered after layers adding for ALL layers with different functions only! Otherwise woun't work correctly!
 	layerMapnik.events.register("visibilitychanged", layerMapnik, function() {
         if (this.getVisibility()) {
@@ -299,7 +312,29 @@ function init() {
         	}
         }
     });
-	layerBing.events.register("visibilitychanged", layerBing, function() {
+	layerBingal.events.register("visibilitychanged", layerBingal, function() {
+        if (this.getVisibility()) {
+        	updateLayer();
+        	if ($('#Permalink').attr("href") === undefined) {
+        		console.warn("Can't update undefined control with Permalink.");
+        	} else {
+        		$('#Permalink').attr("href", myFirstRoute.permalink());
+        		$('#Permalink2').attr("href", myFirstRoute.permalinkWithNames());
+        	}
+        }
+    });
+	layerGooglet.events.register("visibilitychanged", layerGooglet, function() {
+        if (this.getVisibility()) {
+        	updateLayer();
+        	if ($('#Permalink').attr("href") === undefined) {
+        		console.warn("Can't update undefined control with Permalink.");
+        	} else {
+        		$('#Permalink').attr("href", myFirstRoute.permalink());
+        		$('#Permalink2').attr("href", myFirstRoute.permalinkWithNames());
+        	}
+        }
+    });
+	layerGooglesl.events.register("visibilitychanged", layerGooglesl, function() {
         if (this.getVisibility()) {
         	updateLayer();
         	if ($('#Permalink').attr("href") === undefined) {
@@ -398,8 +433,14 @@ function init() {
 						case 'cycle':
 							myFirstMap.setBaseLayer(layerCycle);
 							break;
-						case 'bing':
-							myFirstMap.setBaseLayer(layerBing);
+						case 'bingal':
+							myFirstMap.setBaseLayer(layerBingal);
+							break;
+						case 'googlet':
+							myFirstMap.setBaseLayer(layerGooglet);
+							break;
+						case 'googlesl':
+							myFirstMap.setBaseLayer(layerGooglesl);
 							break;
 							/*
 						case 'cn':
@@ -765,8 +806,14 @@ function updateLayer() {
 				case 'Mapnik':
 					myFirstRoute.parameters.layer = 'mapnik';
 					return;
-				case 'Bing Aerial With Labels':
-					myFirstRoute.parameters.layer = 'bing';
+				case 'Bing Aerial+Labels':
+					myFirstRoute.parameters.layer = 'bingal';
+					return;
+				case 'Google Terrain':
+					myFirstRoute.parameters.layer = 'googlet';
+					return;
+				case 'Google Satellite+Labels':
+					myFirstRoute.parameters.layer = 'googlesl';
 					return;
 			}
 		}
