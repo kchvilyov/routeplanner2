@@ -11,8 +11,7 @@
 			<div id="outer"><!-- this div fixes a render problem in Opera-->
 				<h1>About <a href="/routeplanner" title="<%=routeplannerTitle1%>" alt="<%=definition.getAlt(2)%>"><%=routeplannerTitle0%></a></h1>
 
-				<h3><a href="/routeplanner" title="<%=routeplannerTitle1%>" alt="<%=definition.getAlt(0)%>"><%=routeplannerTitle0%></a></h3>
-				<a href="/routeplanner" title="<%=routeplannerTitle1%>" 	alt="<%=definition.getAlt(0)%>"><%=routeplannerTitle0%></a> is not just 
+				<h3><a href="/routeplanner" title="<%=routeplannerTitle1%>" alt="<%=definition.getAlt(0)%>"><%=routeplannerTitle0%></a></h3> is not just 
 				<a href="/routeplanner" title="<%=definition.getShortTitle(new int[]{0,0,0,6}).toLowerCase()%>" alt="<%=definition.getAlt(9)%>"><%=routeplannerTitle0.toLowerCase()%></a>. 
 				<a href="/routeplanner" title="<%=routeplannerTitle1%>" 	alt="<%=definition.getAlt(0)%>"><%=routeplannerTitle0%></a> is 
 				<a href="/routeplanner" title="<%=definition.getShortTitle(new int[]{3,0,0,7}).toLowerCase()%>" alt="<%=definition.getAlt(1)%>"><%=definition.getShortTitle(new int[]{3,0,0}).toLowerCase()%></a>. 
@@ -53,6 +52,11 @@
 				So if you have some <a href="/routeplanner" title="<%=definition.getShortTitle(new int[]{4,-1,0,3})%>" alt="<%=definition.getAlt(6)%>"><%=definition.getShortTitle(new int[]{4,-1,0}).toLowerCase()%></a> problems or need to see addition possibilities please send me a message.
 				And I will improve <a href="/routeplanner" title="<%=definition.getShortTitle(new int[]{-1,0,0,3})%>" alt="<%=definition.getAlt(7)%>"><%=definition.getShortTitle(new int[]{-1,0,0}).toLowerCase()%></a> to make it 
 				<a href="/routeplanner" title="<%=definition.getShortTitle(new int[]{5,0,0,3})%>" alt="<%=definition.getAlt(8)%>"><%=definition.getShortTitle(new int[]{5,0,0})%></a>. 
+
+				<h3>News</h3>
+				I have added <a href="/routeplanner?layer=googlet" title="Google Terrain map on <%=definition.getShortTitle(new int[]{4,0,0,3})%>" alt="Google Terrain map on <%=definition.getAlt(3)%>">Google Terrain map</a>
+				 to <a href="/routeplanner" title="<%=definition.getShortTitle(new int[]{4,0,0,3})%>" alt="<%=definition.getAlt(3)%>"><%=definition.getShortTitle(new int[]{4,0,0})%></a>
+				 here: <a href="/routeplanner?layer=googlet"><img src="/images/GoogleTerrainMapAtRoutesMapsRouteplanner.gif" style="margin:1px 0 0 4px; vertical-align: top;" title="Google Terrain map on <%=definition.getShortTitle(new int[]{4,0,0,3})%>" alt="Google Terrain map on <%=definition.getAlt(3)%>"></a>.
 			</div>		
 		</div>
 		<%@ include file="footer.html" %>
