@@ -23,7 +23,7 @@ public class Definition {
 	private static final PhraseInterface HIKE_PHRASE =	new StringPhrase("Hike");
 	private static final PhraseInterface TRAVEL_PHRASE =new StringPhrase("Travel");
 	
-	private static final String ROUTES_MAPS_ROUTEPLANNER_DOMAIN =	"routesmaps.com";
+	private static final String ROUTES_MAPS_ROUTEPLANNER_DOMAIN =	"maps.routesmaps.com";
 	private static final PhraseInterface ROUTES_PHRASE =	new StringPhrase("Routes");
 	private static final PhraseInterface MAPS_PHRASE =new StringPhrase("Maps");
 	
@@ -239,7 +239,7 @@ public class Definition {
 	}
 
 	HttpServletRequest request;
-	private boolean localDebug = true; //For debug at the local server
+	private boolean localDebug = false; //For debug at the local server
 
 	public Definition(HttpServletRequest request) {
 		super();
@@ -370,7 +370,7 @@ public class Definition {
 					"})(window,document,'script','//www.google-analytics.com/analytics.js','ga');\n" +
 					"ga('create', 'UA-42403016-1', 'hiketravel.info');\n" +
 					"ga('send', 'pageview');";
-		} else	if (isServerName(ROUTES_MAPS_ROUTEPLANNER_DOMAIN)) {
+		} else	{
 			//<!-- This tracking code can be used on routesmaps.com or any its sub-domain -->
 			return	"(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){\n" +
 					"(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),\n" +
@@ -379,9 +379,7 @@ public class Definition {
 					"ga('create', 'UA-53892662-1', 'auto');\n" +
 					"ga('send', 'pageview');";
 		}
-
-		// TODO add GA for other sites: maps.crimean.us!
-		return "";
+		// TODO add GA for other sites if they are used, e.i.: maps.crimean.us!
 	}
 	
 	/**
