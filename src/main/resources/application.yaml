@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: routeplanner
+  mvc.view.prefix: /
+  mvc.view.suffix: .jsp
