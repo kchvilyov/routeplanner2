@@ -9,9 +9,9 @@
   <properties>
     <start-class>us.crimean.maps.Application</start-class>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>1.7</java.version>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <java.version>1.8</java.version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
     <spring.boot.version>2.6.15</spring.boot.version>
     <slf4j-api.version>1.7.21</slf4j-api.version>
   </properties>
@@ -32,16 +32,6 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
       <version>${spring.boot.version}</version>
-        <exclusions>
-            <exclusion>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-            </exclusion>
-            <exclusion>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-logging</artifactId>
-            </exclusion>
-        </exclusions>
     </dependency>
     <dependency>
         <groupId>org.springframework.boot</groupId>
