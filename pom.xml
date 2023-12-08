@@ -3,11 +3,13 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>routeplanner2</groupId>
   <artifactId>routeplanner2</artifactId>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
   <version>2.0</version>
   <name>routeplanner2</name>
   <properties>
+    <start-class>us.crimean.maps.Application</start-class>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>1.7</java.version>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
     <spring.boot.version>2.6.15</spring.boot.version>
@@ -70,7 +72,45 @@
           <groupId>org.apache.tomcat.embed</groupId>
           <artifactId>tomcat-embed-jasper</artifactId>
           <version>9.0.44</version>
+<!--          <scope>provided</scope>-->
       </dependency>
+
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-tomcat</artifactId>
+          <version>2.4.4</version>
+          <scope>provided</scope>
+      </dependency>
+      <dependency>
+          <groupId>jakarta.servlet.jsp</groupId>
+          <artifactId>jakarta.servlet.jsp-api</artifactId>
+          <version>3.1.1</version>
+          <scope>provided</scope>
+      </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+<!--      <dependency>-->
+<!--          <groupId>org.apache.tomcat</groupId>-->
+<!--          <artifactId>tomcat-jasper</artifactId>-->
+<!--          <version>10.1.16</version>-->
+<!--      </dependency>-->
+<!--      <dependency>-->
+<!--          <groupId>jakarta.servlet.jsp</groupId>-->
+<!--          <artifactId>jakarta.servlet.jsp-api</artifactId>-->
+<!--          <version>3.1.1</version>-->
+<!--          <scope>provided</scope>-->
+<!--      </dependency>-->
+<!--      <dependency>-->
+<!--          <groupId>javax</groupId>-->
+<!--          <artifactId>javaee-web-api</artifactId>-->
+<!--          <version>7.0</version>-->
+<!--          <scope>provided</scope>-->
+<!--      </dependency>-->
       <dependency>
           <groupId>javax.servlet</groupId>
           <artifactId>javax.servlet-api</artifactId>
@@ -145,26 +185,24 @@
         	<version>0.8.2.1</version>
        	</dependency>   
   </dependencies>
-  <profiles>
-    <profile>
-     <!-- When built in OpenShift the 'openshift' profile will be used when invoking mvn. -->
-     <!-- Use this profile for any OpenShift specific customization your app will need. -->
-     <!-- By default that is to put the resulting archive into the 'deployments' folder. -->
-     <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
-     <id>openshift</id>
-     <build>
-        <finalName>routeplanner2</finalName>
-        <plugins>
-          <plugin>
-            <artifactId>maven-war-plugin</artifactId>
-            <version>2.1.1</version>
+  <build>
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <version>${spring.boot.version}</version>
             <configuration>
-              <outputDirectory>deployments</outputDirectory>
-              <warName>ROOT</warName>
+                <mainClass>us.crimean.maps.Application</mainClass>
+                <layout>JAR</layout>
             </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>repackage</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+  </build>
 </project>
