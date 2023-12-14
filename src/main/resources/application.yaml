@@ -3,3 +3,7 @@ spring:
     name: routeplanner
   mvc.view.prefix: /
   mvc.view.suffix: .jsp
+#  main:
+#    web-application-type: SERVLET
+#  profiles:
+#    active: default
