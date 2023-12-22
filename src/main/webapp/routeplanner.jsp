@@ -15,7 +15,7 @@
 		<!-- <script type="text/javascript" src="http://dev.openlayers.org/releases/OpenLayers-2.13.1/OpenLayers.debug.js"></script>-->
 		<script type="text/javascript" src="openlayers/OpenLayers-2.13.1/OpenLayers.debug.js"></script>
         <script type="text/javascript" src="http://openstreetmap.org/openlayers/OpenStreetMap.js"></script>
-        <script type="text/javascript" src="http://dev.openlayers.org/releases/OpenLayers-2.13.1/lib/deprecated.js"></script>
+        <script type="text/javascript" src="openlayers/OpenLayers-2.13.1/lib/deprecated.js"></script>
 
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyALZZlYUwYUBv9PMLRYPAz5OCydWKVA2uE"></script>
 
